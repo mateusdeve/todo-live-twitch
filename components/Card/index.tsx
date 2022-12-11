@@ -1,4 +1,4 @@
-import React, { Dispatch } from "react";
+import React from "react";
 
 interface Props {
   text: string;
@@ -8,7 +8,7 @@ interface Props {
 
 function Card({ text, handleDelete, handleUpdate }: Props) {
   return (
-    <div className="w-full p-5 border border-[#fff] flex justify-between">
+    <div className="w-full p-5 border border-[#fff] flex justify-between card cursor-grab">
       <p className="text-white">{text}</p>
       <div className="flex gap-3">
         <button className="bg-red-600 p-1 px-3 font0" onClick={handleDelete}>

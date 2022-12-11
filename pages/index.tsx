@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Card from "../components/Card";
 import Modal from "../components/Modal";
+import { ReactSortable } from "react-sortablejs";
 
 function Home() {
   const [todos, setTodos] = useState([
-    { text: "Jamelão" },
-    { text: "limax" },
-    { text: "kaiser" },
+    { id: 1, text: "Jamelão" },
+    { id: 2, text: "limax" },
+    { id: 3, text: "kaiser" },
   ]);
 
   const [inputText, setInputText] = useState("");
@@ -15,7 +16,8 @@ function Home() {
 
   const handleCreateTodo = (e: any) => {
     e.preventDefault();
-    setTodos([...todos, { text: inputText }]);
+
+    setTodos([...todos, { id: todos.length + 1, text: inputText }]);
     setInputText("");
   };
 
@@ -51,20 +53,28 @@ function Home() {
               placeholder="Escreva aqui"
               onChange={(e: any) => setInputText(e.target.value)}
               value={inputText}
+              required
             />
             <button className="bg-blue-700 p-5">Add</button>
           </form>
         </div>
 
-        <div className="mx-auto flex flex-col gap-5 mt-20">
-          {todos.map((todo, index) => (
-            <Card
-              handleDelete={() => handleDelete(index)}
-              handleUpdate={() => handleUpdate(index)}
-              text={todo.text}
-              key={index}
-            />
-          ))}
+        <div>
+          <ReactSortable
+            list={todos}
+            setList={setTodos}
+            className="mx-auto flex flex-col gap-5 mt-20"
+            animation={200}
+          >
+            {todos.map((todo, index) => (
+              <Card
+                handleDelete={() => handleDelete(index)}
+                handleUpdate={() => handleUpdate(index)}
+                text={todo.text}
+                key={index}
+              />
+            ))}
+          </ReactSortable>
         </div>
       </div>
     </div>

@@ -3,8 +3,8 @@ import React, { Dispatch, useState } from "react";
 interface Props {
   setShowModal: Dispatch<boolean>;
   inpuTextEdit: number;
-  todos: { text: string }[];
-  setTodos: Dispatch<{ text: string }[]>;
+  todos: { id: number; text: string }[];
+  setTodos: Dispatch<{ id: number; text: string }[]>;
 }
 
 function Modal({ setShowModal, inpuTextEdit, todos, setTodos }: Props) {
